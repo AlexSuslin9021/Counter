@@ -9,6 +9,7 @@ import {Container, Grid} from "@mui/material";
 // import {AppBar} from "@mui/material";
 
 function App() {
+    console.log('Hello')
     let [counter, setCounter] = useState<number | string>('')
     let [max, setMax] = useState<string >('')
     let [min, setMin] = useState<string>('')
