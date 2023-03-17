@@ -1,58 +1,78 @@
 .App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 
-.counter{
-  height: 130px;
-  width: 300px;
-  border: 3px solid lightskyblue;
-  margin-right: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 5px;
-
-
-
-}
-.setup{
-  display: flex;
-  height: 130px;
-  flex-direction: column;
-  width: 300px;
-  border: 3px solid lightskyblue;
-  border-radius: 5px;
-  margin-left:100px ;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-
+.settings {
+    width: 400px;
+    height: 180px;
+    border: 1px solid lightskyblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
+    margin-right: 20px;
 }
 
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.count {
+    width: 200px;
+    height: 80px;
+    border: 1px solid lightskyblue;
 }
 
-.buttonInc {
-
-
-  margin-left: 40px;
+.counter {
+    width: 400px;
+    height: 180px;
+    border: 1px solid lightskyblue;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    border-radius: 5px;
 }
 
+.window {
+    /*display: flex;*/
+    /* justify-content: space-around;*/
+}
 
+.inputContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 100px;
+    border: 1px solid lightskyblue;
+    border-radius: 5px;
+}
 
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: 1px solid lightskyblue;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.tablo {
+    width: 350px;
+    height: 100px;
+    border: 1px solid lightskyblue;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}

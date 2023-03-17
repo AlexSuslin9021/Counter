@@ -1,109 +1,83 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
-
+import React, {useState} from "react";
 import "./App.css";
-import {Buttons} from "./Button/Button";
-import {Tablo} from "./Tablo/Tablo";
-import Input from "./Input/Inpyt";
-import {Container, Grid} from "@mui/material";
+import Button from "./Button/Button";
+import Input from "./Input/Input";
+import Tablo from "./Tablo/Tablo";
 
-// import {AppBar} from "@mui/material";
 
 function App() {
-    console.log('Hello')
-    let [counter, setCounter] = useState<number | string>('')
-    let [max, setMax] = useState<string >('')
-    let [min, setMin] = useState<string>('')
-    let [check, setCheck] = useState<boolean>(false)
-
-    // useEffect(()=>{
-    //     // localStorage.setItem('number', JSON.stringify(counter))
-    //     // localStorage.setItem('maxValue', JSON.stringify(max))
-    //     localStorage.setItem('minValue', JSON.stringify(min))
-    // },[ min])
-
-    // useEffect(()=>{
-    //    let valueString= localStorage.getItem('counterValue')
-    //    let maxString= localStorage.getItem('maxValue')
-    //    let minString= localStorage.getItem('minValue')
-    //     if(valueString) {let a= JSON.parse(valueString)
-    //     setCounter(a)
-    //     }
-    //    else if( maxString){
-    //         let v=JSON.parse(maxString)
-    //       setMax(v)}
-    //
-    //     else if(minString){let c= JSON.parse(minString)
-    //         setMin(c)
-    //     }
-    // },[])
-    useEffect(() => {
-        let valueString = localStorage.getItem('number')
-        let maxString= localStorage.getItem('maxValue')
-        let minString= localStorage.getItem('minValue')
-        if (valueString) {
-            let c = JSON.parse(valueString)
-            setCounter(c)
-        }  if(maxString){
-            let v=JSON.parse(maxString)
-                  setMax(v)
-        }  if(minString){
-            let v=JSON.parse(minString)
-            setMin(v)
-        }
-    },[])
-
-
-    useEffect(() => {
-        localStorage.setItem('number', JSON.stringify(counter))
-        localStorage.setItem('maxValue', JSON.stringify(max))
-        localStorage.setItem('minValue', JSON.stringify(min))
-
-    }, [counter, max, min])
-
-    const buttonHandler = () => {
-        setCounter(Number(counter) + 1)
+    const [startValue, setStartValue] = useState(0)
+    const [maxValue, setMaxValue] = useState(0)
+    const [value, setValue] = useState<number>(0)
+    const [check, setCheck] = useState(false)
+    const onClickInc = () => {
+        setValue(value + 1)
     }
-    const buttonDec = () => {
-        setCounter(Number(min))
+    const onClickReset = () => {
+        setValue(startValue)
     }
-    const buttonSet = () => {
-        setCounter(Number(min))
+    const onClickSet = () => {
+
+        setValue(startValue)
+        setCheck(true)
+    }
+    let a = '';
+    if (startValue < maxValue) a = 'enter value and push "set"'
+    if (startValue >= maxValue) a = 'Incorected value'
+    const onChangeMaxValue = (e: string) => {
+
+        setMaxValue(+e)
+        setCheck(false)
+    }
+    const onChangeStartValue = (e: string) => {
+        setStartValue(+e)
+        setCheck(false)
     }
 
     return <div className={'App'}>
-        <div className={'counter'}>
-            <Tablo buttonSet={buttonSet}
-                   counter={counter}
-                   min={min}
-                   max={max}
-            />
-            <div className={'buttonIncDec'}>
-                <Buttons name={'inc'}
-                         callback={buttonHandler}
-                         check={Number(max) <= counter ? !check : check}
-                ></Buttons>
-                <Buttons name={'dec'}
-                         callback={buttonDec}
-                         check={counter===Number(max) ? check : !check}
 
 
-                ></Buttons>
+        <div className={'settings'}>
+            <div className={'inputContainer'}>
+                <div><Input name={'maxValue'} callback={onChangeMaxValue}/></div>
+                <div><Input name={'startValue'} callback={onChangeStartValue}/></div>
             </div>
-
-        </div>
-        <div className={'setup'}>
-
-            <Input value={max}
-                   name={'MaxValue'}
-                   setFunc={setMax}/>
-            <Input value={min}
-                   name={'StartValue'}
-                   setFunc={setMin}/>
-            <Buttons name={'set'} callback={buttonSet} check={Number(max) <= Number(min) ? !check : check}></Buttons>
+            <div className={'buttonContainer'}>
+                <Button check={check} name={'set'} callback={onClickSet}></Button>
+            </div>
         </div>
 
 
-    </div>;
+        <div className={'counter'}>
+
+            {check ? <>
+                    <div className={'tablo'}>
+                        <Tablo value={value}/>
+                    </div>
+                    <div className={'buttons'}>
+                        <Button check={value === maxValue} name={'inc'} callback={onClickInc}></Button>
+                        <Button check={value !== maxValue} name={'reset'} callback={onClickReset}></Button>
+                    </div>
+                </>
+                :
+                <>
+                <div className={'tablo'}>
+                    <Tablo value={a}/>
+                    </div>
+                    <div className={'buttonContainer'} >
+                        <Button check={true} name={'inc'} callback={onClickInc}></Button>
+                        <Button check={true} name={'reset'} callback={onClickReset}></Button>
+                    </div>
+                </>
+            }
+        </div>
+        {/*<div className={'window'}>*/}
+        {/*    <Button  check={check} name={'inc'} callback={onClickInc}></Button>*/}
+        {/*    <Button check={check} name={'reset'} callback={onClickReset}></Button>*/}
+        {/*</div>*/}
+    </div>
+
+        ;
 }
 
 export default App;
