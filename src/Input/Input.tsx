@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import s from './Input.module.css'
 type InputType={
     callback:(e:string)=>void
     name:string
@@ -8,9 +9,9 @@ const Input = (props:InputType) => {
         props.callback(e.currentTarget.value)
     }
     return (
-        <>
-          <span>{props.name}</span>  <input onChange={onClickInput} type="number"/>
-        </>
+        <div className={s.blockSetting}>
+          <span className={s.span}>{props.name}</span>  <input onChange={onClickInput} type="number"/>
+        </div>
     );
 };
 

@@ -23,7 +23,7 @@ function App() {
     }
     let a = '';
     if (startValue < maxValue) a = 'enter value and push "set"'
-    if (startValue >= maxValue) a = 'Incorected value'
+    if (startValue >= maxValue ||(startValue<0 || maxValue<0)) a = 'Incorected value'
     const onChangeMaxValue = (e: string) => {
 
         setMaxValue(+e)
@@ -38,12 +38,12 @@ function App() {
 
 
         <div className={'settings'}>
-            <div className={'inputContainer'}>
-                <div><Input name={'maxValue'} callback={onChangeMaxValue}/></div>
-                <div><Input name={'startValue'} callback={onChangeStartValue}/></div>
+            <div className={'inputBlock'}>
+                <Input name={'maxValue'} callback={onChangeMaxValue}/>
+                <Input name={'startValue'} callback={onChangeStartValue}/>
             </div>
             <div className={'buttonContainer'}>
-                <Button check={check} name={'set'} callback={onClickSet}></Button>
+                <Button check={startValue>=maxValue || startValue<0 ||maxValue<0} name={'set'} callback={onClickSet}></Button>
             </div>
         </div>
 
@@ -52,7 +52,7 @@ function App() {
 
             {check ? <>
                     <div className={'tablo'}>
-                        <Tablo value={value}/>
+                        <Tablo value={value} check={check}/>
                     </div>
                     <div className={'buttons'}>
                         <Button check={value === maxValue} name={'inc'} callback={onClickInc}></Button>
@@ -62,7 +62,7 @@ function App() {
                 :
                 <>
                 <div className={'tablo'}>
-                    <Tablo value={a}/>
+                    <Tablo value={a} check={ check}/>
                     </div>
                     <div className={'buttonContainer'} >
                         <Button check={true} name={'inc'} callback={onClickInc}></Button>

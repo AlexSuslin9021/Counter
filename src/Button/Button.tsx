@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Button.module.css'
 type ButtonType={
     name:string
     callback:()=>void
@@ -11,7 +12,7 @@ props.callback()
     return (
 
         <div>
-            <button disabled={props.check} onClick={onClickHandler}> {props.name}</button>
+            <button className={s.button} disabled={props.check} onClick={onClickHandler}> {props.name}</button>
         </div>
     );
 };
